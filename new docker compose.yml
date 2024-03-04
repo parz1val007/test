@@ -10,7 +10,7 @@ services:
     ports:
       - 9999:9999
     volumes:
-      - ./config.yml:/app/config.yml
+      - /opt/zurg-testing/config.yml:/app/config.yml
       - zurgdata:/app/data
 
   rclone:
@@ -22,7 +22,7 @@ services:
       PUID: 1000
       PGID: 1000
     volumes:
-      - /mnt/remote/realdebrid:/data:rshared
+      - /home/parz1val/server/remote/realdebrid:/data:rshared
       - /opt/zurg-testing/rclone.conf:/config/rclone/rclone.conf
       - /mnt:/mnt
     cap_add:
