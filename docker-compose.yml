@@ -7,7 +7,7 @@ services:
       - PUID=1000
       - PGID=1000
     ports:
-      - 3030/tcp
+      - 3030:3030/tcp
     hostname: autoscan
     image: saltydk/autoscan:latest
     restart: unless-stopped
@@ -26,7 +26,7 @@ petio:
       - petio.js
     container_name: petio
     ports:
-      - 7777/tcp
+      - 7777:7777/tcp
     hostname: petio
     image: ghcr.io/petio-team/petio:latest
     restart: unless-stopped
@@ -62,9 +62,10 @@ petio:
     environment:
       - PLEX_UID=1000
       - PLEX_GID=1000
+      - PLEX_CLAIM=claim-12345
     ports:
       - 1900/udp
-      - 32400/tcp
+      - 32400:32400/tcp
       - 32410/udp
       - 32412/udp
       - 32413/udp
@@ -89,7 +90,7 @@ petio:
       - PUID=1000
       - PGID=1000
     ports:
-      - 9696/tcp
+      - 9696:9696/tcp
     hostname: prowlarr
     image: ghcr.io/hotio/prowlarr:release
     restart: unless-stopped
@@ -104,7 +105,7 @@ petio:
       - PUID=1000
       - PGID=1000
     ports:
-      - 7878/tcp
+      - 7878:7878/tcp
     hostname: radarr
     image: ghcr.io/hotio/radarr:release
     restart: unless-stopped
@@ -115,64 +116,13 @@ petio:
     depends_on:
       - rclone
 
-  radarr4k:
-    container_name: radarr4k
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 7878/tcp
-    hostname: radarr4k
-    image: ghcr.io/hotio/radarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/radarr4k:/config
-      - /opt/scripts:/scripts
-    depends_on:
-      - rclone
-
-  radarr4kdv:
-    container_name: radarr4kdv
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 7878/tcp
-    hostname: radarr4kdv
-    image: ghcr.io/hotio/radarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/radarr4kdv:/config
-      - /opt/scripts:/scripts
-    depends_on:
-      - rclone
-
-  radarranime:
-    container_name: radarranime
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 7878/tcp
-    hostname: radarranime
-    image: ghcr.io/hotio/radarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/radarranime:/config
-      - /opt/scripts:/scripts
-    depends_on:
-      - rclone
-
   rdtclient:
     container_name: rdtclient
     environment:
-      - "PGID=1000
-      - "PUID=1000
+      - PGID=1000
+      - PUID=1000
     ports:
-      - 6500/tcp
+      - 6500:6500/tcp
     hostname: rdtclient
     image: pukabyte/rdtclient:latest
     restart: unless-stopped
@@ -190,7 +140,7 @@ petio:
       - PUID=1000
       - PGID=1000
     ports:
-      - 8989/tcp
+      - 8989:8989/tcp
     hostname: sonarr
     image: ghcr.io/hotio/sonarr:release
     restart: unless-stopped
@@ -198,57 +148,6 @@ petio:
       - /mnt:/mnt
       - /opt/scripts:/scripts
       - /opt/sonarr:/config
-    depends_on:
-      - rclone
-
-  sonarr4k:
-    container_name: sonarr4k
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 8989/tcp
-    hostname: sonarr4k
-    image: ghcr.io/hotio/sonarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/scripts:/scripts
-      - /opt/sonarr4k:/config
-    depends_on:
-      - rclone
-
-  sonarr4kdv:
-    container_name: sonarr4kdv
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 8989/tcp
-    hostname: sonarr4kdv
-    image: ghcr.io/hotio/sonarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/scripts:/scripts
-      - /opt/sonarr4kdv:/config
-    depends_on:
-      - rclone
-
-  sonarranime:
-    container_name: sonarranime
-    environment:
-      - PUID=1000
-      - PGID=1000
-    ports:
-      - 8989/tcp
-    hostname: sonarranime
-    image: ghcr.io/hotio/sonarr:release
-    restart: unless-stopped
-    volumes:
-      - /mnt:/mnt
-      - /opt/scripts:/scripts
-      - /opt/sonarranime:/config
     depends_on:
       - rclone
 
